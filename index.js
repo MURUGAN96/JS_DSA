@@ -1,21 +1,9 @@
-// Import stylesheets
 import './style.css';
 
-// Write Javascript code!
 const appDiv = document.getElementById('app');
 
-let givenArr = [
-  [7, 1, 3],
-  [2, 8, 7],
-  [1, 9, 5],
-];
+let givenArr = [1, 2, 3, 4, 5, 6, 7];
 
-let max = 0;
-givenArr.forEach((ele, ind, arr) => {
-  let resp = ele.reduce((pre, ini) => pre + ini, 0);
-  resp > max ? (max = resp) : null;
-});
+let middle = Math.ceil(givenArr.length / 2);
 
-console.log(max);
-
-appDiv.innerHTML = `<h1>${max}</h1>`;
+appDiv.innerHTML = `<h1>${givenArr.slice(middle, givenArr.length)}</h1>`;
