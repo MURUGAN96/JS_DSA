@@ -1,42 +1,22 @@
-let interval;
-
-let throttleTime;
-
 const inputBox = document.querySelector('.input_box');
-const defaultValue = document.querySelector('.default_value');
-const debounceValue = document.querySelector('.debounce_value');
-const throttleValue = document.querySelector('.throttle_value');
+const check = document.querySelector('.check'); 
+const result = document.querySelector('.result');
 
-inputBox.addEventListener('input', (e)=>{
-    updateValue(e)
-    deBounce(e, 1000);
-    throttle(e, 1000)
-});
 
-function updateValue(e) {
-    defaultValue.textContent = e.target.value;
-}
-function updateDeBounceValue(e) {
-    debounceValue.textContent = e.target.value;
-}
+check.addEventListener('click',(e)=>{
+    const res = memoize(inputBox.value)
+    result.textContent = res;
+})
 
-function updateThrottleValue(e) {
-    throttleValue.textContent = e.target.value;
-}
+let cache ={}
+const memoize = (input) =>{
+    if(input == 1 ) return 1;
 
-function deBounce(e,delay){
-    if(interval) clearTimeout(interval);
-    interval = setTimeout(()=>{
-        updateDeBounceValue(e)
-    },delay)
-}
-
-function throttle(e,delay){
-    console.log(throttleTime)
-    if(throttleTime) return
-
-    throttleTime = setTimeout(()=>{
-        updateThrottleValue(e);
-        throttleTime = undefined
-    },delay)
+    if(!cache[input]){
+        return cache[input] = input*20000000000000000000000;
+    }
+    else {
+        console.log('cached');
+        return cache[input]
+    }
 }
